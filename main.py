@@ -75,13 +75,14 @@ def tryToMakeEvent():
     else:
         makeSuccessBox()
 
-def displayEventInfo():
+def displayHousewinner():
     for event in eventObject:
         if selectedEvent.get() == event.name:
             messagebox.showinfo("The leaderboard of the house competition is: !", event.printHousewinner())
 
 #GUI widgets
 root = Tk()
+root.title("House Event Calculator")
 
 #Make a place for the user to enter a new event info
 nameLabel = Label(root, text="Name: ")
@@ -122,7 +123,7 @@ selectedEvent = StringVar()
 eventChoice = OptionMenu(root, selectedEvent, *eventNames)
 eventChoice.pack()
 
-eventInfoButton = Button(root, text="Print Event Info", command=displayEventInfo)
+eventInfoButton = Button(root, text="The leaderboard of the house competition is: ", command=displayHousewinner)
 eventInfoButton.pack()
 
 #Run the program
