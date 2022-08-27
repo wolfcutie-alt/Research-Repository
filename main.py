@@ -1,4 +1,6 @@
 #import
+from asyncio import events
+from cProfile import label
 from tkinter import *
 from tkinter import messagebox
 
@@ -40,6 +42,7 @@ class Event:
 eventObject = []
 eventNames = []
 
+#
 event1 = Event("Lampada Games", True, 75, 60, 72, 68)
 event2 = Event("House Trivia", False, 66, 68, 74, 73)
 #GUI
@@ -50,7 +53,8 @@ def makeSuccessBox():
 
 def makeFailureBox():
     messagebox.showinfo("Failure", "Unable to added new event: check your input and try again")
-
+#The function below checks if any of the input wrong data type, if yes then the function will return false else it'll return true 
+#This function will be used later to check the validity of the user input
 def makeNewEvent():
     if nameEntry.get() == "":
         return False
@@ -74,11 +78,23 @@ def tryToMakeEvent():
         makeFailureBox()
     else:
         makeSuccessBox()
-
+#This function holds the necessary code to display the leaderboard of the house competition
 def displayHousewinner():
     for event in eventObject:
         if selectedEvent.get() == event.name:
             messagebox.showinfo("The leaderboard of the house competition is: !", event.printHousewinner())
+
+def refreshEventChoiceMenu():
+    #Go to the eventChoice OptionMenu and delete all of the current options
+    eventChoice.children["menu"].delete(0, "end")
+    #for every option in the eventNames list, add it to the OptionMenu
+    for event in eventNames:
+        eventChoice.children["menu"].add_command(label=event, command=lambda: selectedEvent.set(event))
+
+#Add a new eveny to the eventChoice OptionMenu
+def addNewCarToMenu(event):
+    #eventChoice.children["menu"].add_command(label=event.name, command=selectedEvent.set(event.name))
+    eventChoice.children["menu"].add_command(label=event.name, command=lambda: selectedEvent.set(event.name))
 
 #GUI widgets
 root = Tk()
