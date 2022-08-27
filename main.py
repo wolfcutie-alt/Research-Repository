@@ -29,7 +29,6 @@ class Event:
             sum3 += self.kowhai_point
         while self.rimu_point:
             sum4 += self.rimu_point
-        return max(sum1, sum2, sum3, sum4)
 
     def type(self):
         if self.type == True:
@@ -53,6 +52,7 @@ def makeSuccessBox():
 
 def makeFailureBox():
     messagebox.showinfo("Failure", "Unable to added new event: check your input and try again")
+
 #The function below checks if any of the input wrong data type, if yes then the function will return false else it'll return true 
 #This function will be used later to check the validity of the user input
 def makeNewEvent():
@@ -71,8 +71,11 @@ def makeNewEvent():
     isSport = True
     if typeEntry.get() == "No":
         isSport = False
-    Event(nameEntry.get(), isSport, int(pohutukawaPointEntry.get()), int(kauriPointEntry.get()), int(kowhaiPointEntry.get()), int(rimuPointEntry.get()))
+    newEvent = Event(nameEntry.get(), isSport, int(pohutukawaPointEntry.get()), int(kauriPointEntry.get()), int(kowhaiPointEntry.get()), int(rimuPointEntry.get()))
+    #refreshCarChoiceMenu()
+    addNewEventToMenu(newEvent)
     return True
+
 def tryToMakeEvent():
     if makeNewEvent() == False:
         makeFailureBox()
@@ -92,7 +95,7 @@ def refreshEventChoiceMenu():
         eventChoice.children["menu"].add_command(label=event, command=lambda: selectedEvent.set(event))
 
 #Add a new eveny to the eventChoice OptionMenu
-def addNewCarToMenu(event):
+def addNewEventToMenu(event):
     #eventChoice.children["menu"].add_command(label=event.name, command=selectedEvent.set(event.name))
     eventChoice.children["menu"].add_command(label=event.name, command=lambda: selectedEvent.set(event.name))
 
