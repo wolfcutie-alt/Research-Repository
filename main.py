@@ -16,19 +16,8 @@ class Event:
         eventObject.append(self)
         eventNames.append(event_name)
 
-    def printHousewinner(self):
-        sum1 = 0
-        sum2 = 0
-        sum3 = 0
-        sum4 = 0
-        while self.pohutukawa_point:
-            sum1 += self.pohutukawa_point
-        while self.kauri_point:
-            sum2 += self.kauri_point
-        while self.kowhai_point:
-            sum3 += self.kowhai_point
-        while self.rimu_point:
-            sum4 += self.rimu_point
+    def printEventInfo(self):
+        return f"The {self.name} is {self.type}. Score of 4 Houses: Pohutukawa Score: {self.pohutukawa_point}, Kauri Score: {self.kauri_point}, Kowhai Score: {self.kowhai_point}, Rimu Score: {self.rimu_point}" 
 
     def type(self):
         if self.type == True:
@@ -81,11 +70,12 @@ def tryToMakeEvent():
         makeFailureBox()
     else:
         makeSuccessBox()
+
 #This function holds the necessary code to display the leaderboard of the house competition
-def displayHousewinner():
+def displayEventInfo():
     for event in eventObject:
         if selectedEvent.get() == event.name:
-            messagebox.showinfo("The leaderboard of the house competition is: !", event.printHousewinner())
+            messagebox.showinfo("The Event Info is: !", event.printEventInfo())
 
 def refreshEventChoiceMenu():
     #Go to the eventChoice OptionMenu and delete all of the current options
@@ -94,7 +84,7 @@ def refreshEventChoiceMenu():
     for event in eventNames:
         eventChoice.children["menu"].add_command(label=event, command=lambda: selectedEvent.set(event))
 
-#Add a new eveny to the eventChoice OptionMenu
+#Add a new event to the eventChoice OptionMenu
 def addNewEventToMenu(event):
     #eventChoice.children["menu"].add_command(label=event.name, command=selectedEvent.set(event.name))
     eventChoice.children["menu"].add_command(label=event.name, command=lambda: selectedEvent.set(event.name))
@@ -142,7 +132,7 @@ selectedEvent = StringVar()
 eventChoice = OptionMenu(root, selectedEvent, *eventNames)
 eventChoice.pack()
 
-eventInfoButton = Button(root, text="The leaderboard of the house competition is: ", command=displayHousewinner)
+eventInfoButton = Button(root, text="The Event Info is: ", command=displayEventInfo)
 eventInfoButton.pack()
 
 #Run the program
