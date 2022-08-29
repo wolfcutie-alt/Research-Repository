@@ -1,6 +1,4 @@
 #import
-from asyncio import events
-from cProfile import label
 from tkinter import *
 from tkinter import messagebox
 
