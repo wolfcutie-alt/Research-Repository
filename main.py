@@ -1,6 +1,8 @@
 #import
 from tkinter import *
 from tkinter import messagebox
+from PIL import ImageTk, Image
+import os
 
 #Background Code
 class Event:
@@ -90,6 +92,9 @@ def addNewEventToMenu(event):
 #GUI widgets
 root = Tk()
 root.title("House Event Calculator")
+img = ImageTk.PhotoImage(Image.open("image.png"))
+panel = Label(root, image=img)
+panel.pack(side="bottom", fill="both", expand="yes")
 
 #Make a place for the user to enter a new event info
 nameLabel = Label(root, text="Name: ")
