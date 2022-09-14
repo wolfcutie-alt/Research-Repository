@@ -1,8 +1,9 @@
 #import
+import imp
 from tkinter import *
 from tkinter import messagebox
-from PIL import ImageTk, Image
 import os
+from turtle import color
 
 #Background Code
 class Event:
@@ -30,9 +31,9 @@ class Event:
 eventObject = []
 eventNames = []
 
-#
 event1 = Event("Lampada Games", True, 75, 60, 72, 68)
 event2 = Event("House Trivia", False, 66, 68, 74, 73)
+
 #GUI
 
 #GUI functions
@@ -47,14 +48,18 @@ def makeFailureBox():
 def makeNewEvent():
     if nameEntry.get() == "":
         return False
-    if pohutukawaPointEntry.get().isdigit() == False:
-        return False
-    if kauriPointEntry.get().isdigit() == False:
-        return False
+    if pohutukawaPointEntry.get().isdigit() == False: 
+        if pohutukawaPointEntry.get().isdigit() > 100:
+            return False
+    if kauriPointEntry.get().isdigit() == False: 
+        if kauriPointEntry.get().isdigit() > 100:
+            return False
     if kowhaiPointEntry.get().isdigit() == False:
-        return False
-    if rimuPointEntry.get().isdigit() == False:
-        return False
+        if kowhaiPointEntry.get().isdigit() > 100:
+            return False
+    if rimuPointEntry.get().isdigit() == False: 
+        if rimuPointEntry.get().isdigit() > 100:
+            return False
     if typeEntry.get() != "Yes" and typeEntry.get() != "No":
         return False
     isSport = True
@@ -92,9 +97,6 @@ def addNewEventToMenu(event):
 #GUI widgets
 root = Tk()
 root.title("House Event Calculator")
-img = ImageTk.PhotoImage(Image.open("image.png"))
-panel = Label(root, image=img)
-panel.pack(side="bottom", fill="both", expand="yes")
 
 #Make a place for the user to enter a new event info
 nameLabel = Label(root, text="Name: ")
