@@ -1,9 +1,6 @@
 #import
-import imp
 from tkinter import *
 from tkinter import messagebox
-import os
-from turtle import color
 
 #Background Code
 class Event:
@@ -16,9 +13,20 @@ class Event:
         self.rimu_point = rimu_point
         eventObject.append(self)
         eventNames.append(event_name)
+        pohutukawaPoint.append(pohutukawa_point)
+        kauriPoint.append(kauri_point)
+        kowhaiPoint.append(kowhai_point)
+        rimuPoint.append(rimu_point)
+        
+        self.totalPohutukawaPoint = sum(pohutukawaPoint)
+        self.totalKauriPoint = sum(kauriPoint)
+        self.totalKowhaiPoint = sum(kowhaiPoint)
+        self.totalRimuPoint = sum(rimuPoint)
+        
+        self.winner = max(self.totalPohutukawaPoint, self.totalKauriPoint, self.totalKowhaiPoint, self.totalRimuPoint)
 
-    def printEventInfo(self):
-        return f"The {self.name} is {self.type}. Score of 4 Houses: Pohutukawa Score: {self.pohutukawa_point}, Kauri Score: {self.kauri_point}, Kowhai Score: {self.kowhai_point}, Rimu Score: {self.rimu_point}" 
+    def printLeaderboard(self):
+        return f"The Leaderboard is {self.winner}. Score of 4 Houses: \n 1.Pohutukawa Score: {self.totalPohutukawaPoint},\n 2.Kauri Score: {self.totalKauriPoint},\n 3.Kowhai Score: {self.totalKowhaiPoint},\n 4.Rimu Score: {self.totalRimuPoint}" 
 
     def type(self):
         if self.type == True:
@@ -30,6 +38,12 @@ class Event:
 #Set up Objects and Lists for the program
 eventObject = []
 eventNames = []
+pohutukawaPoint = []
+kauriPoint = []
+kowhaiPoint = []
+rimuPoint = []
+
+
 
 event1 = Event("Lampada Games", True, 75, 60, 72, 68)
 event2 = Event("House Trivia", False, 66, 68, 74, 73)
@@ -77,10 +91,10 @@ def tryToMakeEvent():
         makeSuccessBox()
 
 #This function holds the necessary code to display the leaderboard of the house competition
-def displayEventInfo():
+def displayLeaderboard():
     for event in eventObject:
         if selectedEvent.get() == event.name:
-            messagebox.showinfo("The Event Info is: !", event.printEventInfo())
+            messagebox.showinfo("The Leaderboard is: !", event.printLeaderboard())
 
 def refreshEventChoiceMenu():
     #Go to the eventChoice OptionMenu and delete all of the current options
@@ -137,8 +151,8 @@ selectedEvent = StringVar()
 eventChoice = OptionMenu(root, selectedEvent, *eventNames)
 eventChoice.pack()
 
-eventInfoButton = Button(root, text="The Event Info is: ", command=displayEventInfo)
-eventInfoButton.pack()
+leaderBoardButton = Button(root, text="The Leaderboard is: ", command=displayLeaderboard)
+leaderBoardButton.pack()
 
 #Run the program
 root.mainloop()
