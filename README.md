@@ -13,5 +13,5 @@ a.Name's row using character data type and Points's rows use number data type.</
 b.Event's sport or not using 'Yes' or 'No' with capitalize.</br> 
 
 ## 3.Example:
-![image](https://github.com/wolfcutie-alt/Research-Repository/assets/78878767/cc3c3702-443f-4769-bf7a-2dd525943a31)</br>
+![image](https://github.com/wolfcutie-alt/Research-Repository/assets/78878767/8d72c3fe-11b0-4973-aa48-9cb8fc1fffdb)</br>
 This is my example to display the point of each group and show the leaderboard of the all events.
